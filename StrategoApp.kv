@@ -1,0 +1,96 @@
+
+<StrategoGame>:
+    id: game
+    height: self.width * .7
+
+
+    BoxLayout:
+        GameBoard:
+            id: board
+            size_hint_x: 10/14
+
+        SideBoard:
+            id: sidebar
+            size_hint_x: 4/14
+
+
+
+<Popup>:
+    size_hint: None, None
+    size: (1000,500)
+    title: "STRATEGO"
+    title_align: "center"
+    auto_dismiss: False
+    instructions: "dummy"
+    startbuttontext: "dummy"
+    buttonpress: None
+
+    BoxLayout:
+        id: layout
+        orientation: "vertical"
+        Label:
+            id: instructions
+            size_hint_y: 2/3
+            text: root.instructions
+        Button:
+            id: startbutton
+            size_hint_y: 1/3
+            text: root.startbuttontext
+            on_press: root.buttonpress()
+
+
+
+<Square>:
+    background_normal: self.get_background_image()
+    background_disabled_normal: self.get_disabled_image()
+    border: (0,0,0,0)
+    on_press: self.parent.eventsobject.square_press(self)
+
+
+<GamePiece>:
+    id: gamepiece
+    size_hint:(None, None)
+    group: self.player_color
+    border: (0,0,0,0)
+    on_press: self.eventsobject.gamepiece_press(self)
+
+
+    AnchorLayout:
+        id: layout
+        center: root.center
+        on_size: self.size = root.size
+        anchor_x: "left"
+        anchor_y: "bottom"
+
+        canvas:
+            Color:
+                rgba: 0,0,0,1
+            Ellipse:
+                id: circle
+                size: (root.width/2.5, root.height/3)
+                #pos: -15, -20
+                pos: root.pos
+
+    Label:
+        id: number
+        text: str(root.number)
+        color: (1,1,1,1)
+        text_size: self.size
+        #font_size: root.height/4
+        bold: True
+        pos: root.pos
+        size_hint: None, None
+        size: (root.width/2.5, root.height/3)
+        halign: "center"
+        valign: "middle"
+
+
+
+
+
+
+
+
+
+
+
